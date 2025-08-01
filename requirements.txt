@@ -10,4 +10,4 @@ bs4
 gunicorn
 flask-cors
 pytz
-vercel-python-wsgi
+
