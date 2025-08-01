@@ -2,6 +2,7 @@
 from flask import Flask, request, jsonify
 from inshorts import getNews
 from flask_cors import CORS
+import os
 
 app = Flask(__name__)
 app.secret_key = "i_am_not_feeling_sleepy_so_i_am_coding_this"
@@ -275,6 +276,11 @@ def docs():
     # Serve the UI as documentation at /docs
     return news_ui()
 
+@app.route('/healthz')
+def healthz():
+    return jsonify({"status": "ok"})
+
 if __name__ == '__main__':
-    app.debug = True
-    app.run(host='0.0.0.0',port=5000,use_reloader=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.debug = False
+    app.run(host='0.0.0.0', port=port, use_reloader=False)
