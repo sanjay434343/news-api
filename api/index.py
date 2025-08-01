@@ -1,12 +1,12 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from inshorts import getNews
+from main import app as main_app
 
 app = Flask(__name__)
 app.secret_key = "i_am_not_feeling_sleepy_so_i_am_coding_this"
 CORS(app)
 
-# ...existing route handlers from app.py...
 @app.route('/')
 def home():
     return jsonify({
@@ -32,3 +32,6 @@ def news():
 @app.route('/api/healthz')
 def healthz():
     return jsonify({"status": "ok"})
+
+def handler(event, context):
+    return main_app(event, context)
