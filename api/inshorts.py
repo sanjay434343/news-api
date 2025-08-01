@@ -3,6 +3,8 @@ import datetime
 import uuid
 import requests
 import pytz
+from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 
 headers = {
@@ -27,12 +29,14 @@ params = (
     ('include_card_data', 'true')
 )
 
+app = Flask(__name__)
+CORS(app)
+
 
 def getNews(category):
-    import flask
     # Support offset and limit for batching
-    offset = int(flask.request.args.get('offset', 0))
-    limit = int(flask.request.args.get('limit', 10))
+    offset = int(request.args.get('offset', 0))
+    limit = int(request.args.get('limit', 10))
     current_year = datetime.datetime.now().year
     all_news = []
     fetched = 0
@@ -94,3 +98,17 @@ def getNews(category):
     if not all_news:
         newsDictionary['error'] = 'No news found for this year'
     return newsDictionary
+
+
+@app.route('/')
+def home():
+    return jsonify({
+        "message": "Welcome to the Inshorts News API",
+        "usage": "/news?category=<category>&offset=<offset>&limit=<limit>"
+    })
+
+
+@app.route('/news')
+def news():
+    category = request.args.get("category", "all")
+    return jsonify(getNews(category))
