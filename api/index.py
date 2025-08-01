@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from inshorts import getNews
 from main import app as main_app
+from vercel_python_wsgi import make_lambda_handler
 
 app = Flask(__name__)
 app.secret_key = "i_am_not_feeling_sleepy_so_i_am_coding_this"
@@ -33,5 +34,4 @@ def news():
 def healthz():
     return jsonify({"status": "ok"})
 
-def handler(event, context):
-    return main_app(event, context)
+handler = make_lambda_handler(app)
