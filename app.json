@@ -1,0 +1,30 @@
+{
+  "name": "Inshorts-News-API",
+  "description": "Unofficial API of Inshorts News",
+  "keywords": [
+    "flask",
+    "python",
+    "news",
+    "inshorts",
+    "api",
+    "rest"
+  ],
+  "repository": "https://github.com/sanjay434343/news-api",
+  "website": "https://github.com/sanjay434343/news-api",
+  "logo": "https://raw.githubusercontent.com/sanjay434343/news-api/main/logo.png",
+  "authors": [
+    {
+      "name": "Sanjay",
+      "github": "https://github.com/sanjay434343"
+    }
+  ],
+  "license": "MIT",
+  "stack": [
+    "python",
+    "flask"
+  ],
+  "contact_email": "sanjay13649@gmail.com",
+  "env": {
+    "PYTHON_VERSION": "3.7+"
+  }
+}
